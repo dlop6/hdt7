@@ -12,7 +12,7 @@ import org.junit.Test;
  */
 public class BinaryTreeTest {
     @Test
-    public void checkingTheRoot(){
+    public void checkingTheRoot() {
         BinaryTree<String> tree = new BinaryTree<String>();
         tree.insert("blue", "azul");
         tree.insert("red", "rojo");
@@ -24,7 +24,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void checkingInOrder(){
+    public void checkingordenado() {
         BinaryTree<String> tree = new BinaryTree<String>();
         tree.insert("wolf", "lobo");
         tree.insert("dog", "perro");
@@ -32,13 +32,13 @@ public class BinaryTreeTest {
         tree.insert("fish", "pez");
 
         ArrayList<Asociacion<String, String>> Expected = new ArrayList<Asociacion<String, String>>(Arrays.asList(
-            new Asociacion<String, String>("cat", "gato"),
-            new Asociacion<String, String>("dog", "perro"),
-            new Asociacion<String, String>("fish", "pez"),
-            new Asociacion<String, String>("wolf", "lobo")
-        ));
+                new Asociacion<String, String>("cat", "gato"),
+                new Asociacion<String, String>("dog", "perro"),
+                new Asociacion<String, String>("fish", "pez"),
+                new Asociacion<String, String>("wolf", "lobo")));
 
-        ArrayList<Asociacion<String, String>> result = tree.inOrder(tree.getRoot(), new ArrayList<Asociacion<String, String>>());
+        ArrayList<Asociacion<String, String>> result = tree.ordenado(tree.getRoot(),
+                new ArrayList<Asociacion<String, String>>());
         for (int i = 0; i < result.size(); i++) {
             assertTrue(result.get(i).getKey().equals(Expected.get(i).getKey()));
             assertTrue(result.get(i).getValue().equals(Expected.get(i).getValue()));
@@ -46,7 +46,7 @@ public class BinaryTreeTest {
     }
 
     @Test
-    public void findAssociation(){
+    public void findAssociation() {
         BinaryTree<String> tree = new BinaryTree<String>();
         tree.insert("blue", "azul");
         tree.insert("red", "rojo");
@@ -57,5 +57,5 @@ public class BinaryTreeTest {
         assertTrue(tree.find("red").equals("rojo"));
         assertTrue(tree.find("yellow").equals("amarillo"));
         assertTrue(tree.find("black").equals("negro"));
-        }
-        }
+    }
+}

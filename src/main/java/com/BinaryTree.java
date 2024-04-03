@@ -5,7 +5,8 @@ import java.util.ArrayList;
 /**
  * Esta clase representa un árbol binario.
  * 
- * @param <T> el tipo de datos que se almacenará en el árbol, debe ser comparable.
+ * @param <T> el tipo de datos que se almacenará en el árbol, debe ser
+ *            comparable.
  */
 public class BinaryTree<T extends Comparable<T>> {
     private TreeNode<T> root;
@@ -29,11 +30,12 @@ public class BinaryTree<T extends Comparable<T>> {
     /**
      * Inserta un nuevo nodo en el árbol con la clave y el valor especificados.
      * 
-     * @param key la clave del nodo.
+     * @param key   la clave del nodo.
      * @param value el valor del nodo.
      */
     public void insert(T key, T value) {
-        // Implementación obtenida de https://www.geeksforgeeks.org/binary-find-tree-set-1-find-and-insertion/
+        // Implementación obtenida de
+        // https://www.geeksforgeeks.org/binary-find-tree-set-1-find-and-insertion/
         TreeNode<T> newTreeNode = new TreeNode<T>(key, value);
         if (root == null) {
             root = newTreeNode;
@@ -60,10 +62,12 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     /**
-     * Busca un nodo en el árbol con la clave especificada y devuelve su valor asociado.
+     * Busca un nodo en el árbol con la clave especificada y devuelve su valor
+     * asociado.
      * 
      * @param key la clave del nodo a buscar.
-     * @return el valor asociado al nodo encontrado, o null si no se encuentra el nodo.
+     * @return el valor asociado al nodo encontrado, o null si no se encuentra el
+     *         nodo.
      */
     public T find(T key) {
         TreeNode<T> current = root;
@@ -80,17 +84,18 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     /**
-     * Realiza un recorrido in-order en el árbol y devuelve una lista de las asociaciones de los nodos.
+     * Realiza un recorrido in-order en el árbol y devuelve una lista de las
+     * asociaciones de los nodos.
      * 
      * @param treeNode el nodo a partir del cual se realizará el recorrido.
-     * @param list la lista donde se almacenarán las asociaciones de los nodos.
+     * @param list     la lista donde se almacenarán las asociaciones de los nodos.
      * @return la lista de las asociaciones de los nodos en orden.
      */
-    public ArrayList<Asociacion<T,T>> inOrder(TreeNode<T> treeNode, ArrayList<Asociacion<T,T>> list) {
+    public ArrayList<Asociacion<T, T>> ordenado(TreeNode<T> treeNode, ArrayList<Asociacion<T, T>> list) {
         if (treeNode != null) {
-            inOrder(treeNode.getLeft(), list);
+            ordenado(treeNode.getLeft(), list);
             list.add(treeNode.getAsociacion());
-            inOrder(treeNode.getRight(), list);
+            ordenado(treeNode.getRight(), list);
         }
         return list;
     }
