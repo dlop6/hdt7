@@ -1,0 +1,80 @@
+import org.junit.Before;
+import org.junit.Test;
+
+import java.util.ArrayList;
+
+import static org.junit.Assert.*;
+
+public class BinaryTreeTest {
+
+    private BinaryTree<Integer> binaryTree;
+
+    @Before
+    public void setUp() {
+        binaryTree = new BinaryTree<>();
+    }
+
+    @Test
+    public void testInsert() {
+        binaryTree.insert(5);
+        binaryTree.insert(3);
+        binaryTree.insert(7);
+        binaryTree.insert(2);
+        binaryTree.insert(4);
+
+        TreeNode<Integer> root = binaryTree.getRoot();
+        assertNotNull(root);
+        assertEquals(5, (int) root.data);
+
+        TreeNode<Integer> leftChild = root.left;
+        assertNotNull(leftChild);
+        assertEquals(3, (int) leftChild.data);
+
+        TreeNode<Integer> rightChild = root.right;
+        assertNotNull(rightChild);
+        assertEquals(7, (int) rightChild.data);
+
+        TreeNode<Integer> leftGrandchild = leftChild.left;
+        assertNotNull(leftGrandchild);
+        assertEquals(2, (int) leftGrandchild.data);
+
+        TreeNode<Integer> rightGrandchild = leftChild.right;
+        assertNotNull(rightGrandchild);
+        assertEquals(4, (int) rightGrandchild.data);
+    }
+
+    @Test
+    public void testFind() {
+        binaryTree.insert(5);
+        binaryTree.insert(3);
+        binaryTree.insert(7);
+        binaryTree.insert(2);
+        binaryTree.insert(4);
+
+        TreeNode<Integer> foundNode = binaryTree.find(7);
+        assertNotNull(foundNode);
+        assertEquals(7, (int) foundNode.data);
+
+        TreeNode<Integer> notFoundNode = binaryTree.find(6);
+        assertNull(notFoundNode);
+    }
+
+    @Test
+    public void testOrdenarlo() {
+        binaryTree.insert(5);
+        binaryTree.insert(3);
+        binaryTree.insert(7);
+        binaryTree.insert(2);
+        binaryTree.insert(4);
+
+        ArrayList<Association<Integer, Integer>> sortedList = binaryTree.Ordenarlo(binaryTree.getRoot(),
+                new ArrayList<>());
+        assertEquals(5, sortedList.size());
+
+        assertEquals(2, (int) sortedList.get(0).getKey());
+        assertEquals(3, (int) sortedList.get(1).getKey());
+        assertEquals(4, (int) sortedList.get(2).getKey());
+        assertEquals(5, (int) sortedList.get(3).getKey());
+        assertEquals(7, (int) sortedList.get(4).getKey());
+    }
+}
