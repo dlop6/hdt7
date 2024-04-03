@@ -5,19 +5,26 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
+/**
+ * La clase lectorOracion proporciona un método para cargar un archivo de texto y convertirlo en una lista de oraciones.
+ */
 public class lectorOracion {
-    public static ArrayList<ArrayList<String>> LoadTxt(String txt_path){
+    /**
+     * Carga un archivo de texto y devuelve una lista de oraciones.
+     * Cada oración se representa como una lista de palabras en minúsculas.
+     * 
+     * @param txt_path la ruta del archivo de texto a cargar
+     * @return una lista de oraciones, donde cada oración es una lista de palabras en minúsculas
+     */
+    public static ArrayList<ArrayList<String>> LoadTxt(String txt_path) {
         ArrayList<ArrayList<String>> sentences = new ArrayList<ArrayList<String>>();
         try (Scanner sc = new Scanner(new File(txt_path))) {
             while (sc.hasNextLine()) {
                 String line = sc.nextLine();
                 String[] parts = line.split(" ");
-                for (int i = 0; i < parts.length; i++) {
-                    parts[i] = parts[i].toLowerCase();
-                }
                 ArrayList<String> sentence = new ArrayList<String>();
                 for (String part : parts) {
-                    sentence.add(part);
+                    sentence.add(part.toLowerCase());
                 }
                 sentences.add(sentence);
             }

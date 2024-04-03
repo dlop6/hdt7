@@ -1,21 +1,25 @@
 package com;
 
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import org.junit.Test;
+
+/**
+ * Unit test for simple App.
+ */
 public class BinaryTreeTest {
     @Test
     public void checkingTheRoot(){
         BinaryTree<String> tree = new BinaryTree<String>();
-        tree.insert("wolf", "lobo");
-        tree.insert("dog", "perro");
-        tree.insert("cat", "gato");
-        tree.insert("fish", "pez");
+        tree.insert("blue", "azul");
+        tree.insert("red", "rojo");
+        tree.insert("yellow", "amarillo");
+        tree.insert("black", "negro");
 
-        assertTrue(tree.getRoot().getData().equals("wolf"));
+        assertTrue(tree.getRoot().getData().equals("blue"));
 
     }
 
@@ -27,14 +31,14 @@ public class BinaryTreeTest {
         tree.insert("cat", "gato");
         tree.insert("fish", "pez");
 
-        ArrayList<Association<String, String>> Expected = new ArrayList<Association<String, String>>(Arrays.asList(
-            new Association<String, String>("cat", "gato"),
-            new Association<String, String>("dog", "perro"),
-            new Association<String, String>("fish", "pez"),
-            new Association<String, String>("wolf", "lobo")
+        ArrayList<Asociacion<String, String>> Expected = new ArrayList<Asociacion<String, String>>(Arrays.asList(
+            new Asociacion<String, String>("cat", "gato"),
+            new Asociacion<String, String>("dog", "perro"),
+            new Asociacion<String, String>("fish", "pez"),
+            new Asociacion<String, String>("wolf", "lobo")
         ));
 
-        ArrayList<Association<String, String>> result = tree.Ordenarlo(tree.getRoot(), new ArrayList<Association<String, String>>());
+        ArrayList<Asociacion<String, String>> result = tree.inOrder(tree.getRoot(), new ArrayList<Asociacion<String, String>>());
         for (int i = 0; i < result.size(); i++) {
             assertTrue(result.get(i).getKey().equals(Expected.get(i).getKey()));
             assertTrue(result.get(i).getValue().equals(Expected.get(i).getValue()));
@@ -44,15 +48,14 @@ public class BinaryTreeTest {
     @Test
     public void findAssociation(){
         BinaryTree<String> tree = new BinaryTree<String>();
-        tree.insert("wolf", "lobo");
-        tree.insert("dog", "perro");
-        tree.insert("cat", "gato");
-        tree.insert("fish", "pez");
+        tree.insert("blue", "azul");
+        tree.insert("red", "rojo");
+        tree.insert("yellow", "amarillo");
+        tree.insert("black", "negro");
 
-        assertTrue(tree.find("wolf").equals("lobo"));
-        assertTrue(tree.find("dog").equals("perro"));
-        assertTrue(tree.find("cat").equals("gato"));
-        assertTrue(tree.find("fish").equals("pez"));
-    }
-
-}
+        assertTrue(tree.find("blue").equals("azul"));
+        assertTrue(tree.find("red").equals("rojo"));
+        assertTrue(tree.find("yellow").equals("amarillo"));
+        assertTrue(tree.find("black").equals("negro"));
+        }
+        }

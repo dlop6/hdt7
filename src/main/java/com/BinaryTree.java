@@ -2,38 +2,56 @@ package com;
 
 import java.util.ArrayList;
 
-public class BinaryTree<T extends Comparable <T>> {
-
+/**
+ * Esta clase representa un árbol binario.
+ * 
+ * @param <T> el tipo de datos que se almacenará en el árbol, debe ser comparable.
+ */
+public class BinaryTree<T extends Comparable<T>> {
     private TreeNode<T> root;
 
+    /**
+     * Crea un nuevo árbol binario vacío.
+     */
     public BinaryTree() {
         this.root = null;
     }
 
+    /**
+     * Obtiene el nodo raíz del árbol.
+     * 
+     * @return el nodo raíz del árbol.
+     */
     public TreeNode<T> getRoot() {
         return root;
     }
 
-    public void insert(T key, T value) { // obtenido de  //Implemntacion agarra de https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/ (GOAT GeeksforGeeks!!)
-        TreeNode<T> newNode = new TreeNode<T>(key, value);
+    /**
+     * Inserta un nuevo nodo en el árbol con la clave y el valor especificados.
+     * 
+     * @param key la clave del nodo.
+     * @param value el valor del nodo.
+     */
+    public void insert(T key, T value) {
+        // Implementación obtenida de https://www.geeksforgeeks.org/binary-find-tree-set-1-find-and-insertion/
+        TreeNode<T> newTreeNode = new TreeNode<T>(key, value);
         if (root == null) {
-            root = newNode;
-        }
-        else {
+            root = newTreeNode;
+        } else {
             TreeNode<T> current = root;
             TreeNode<T> parent;
             while (true) {
                 parent = current;
-                if (key.compareTo(current.getData()) < 0) {
-                    current = current.getLeft();
+                if (key.compareTo(current.getData()) > 0) {
+                    current = current.getRight();
                     if (current == null) {
-                        parent.setLeft(newNode);
+                        parent.setRight(newTreeNode);
                         return;
                     }
                 } else {
-                    current = current.getRight();
+                    current = current.getLeft();
                     if (current == null) {
-                        parent.setRight(newNode);
+                        parent.setLeft(newTreeNode);
                         return;
                     }
                 }
@@ -41,32 +59,39 @@ public class BinaryTree<T extends Comparable <T>> {
         }
     }
 
-    public TreeNode<T> find(T data) {
+    /**
+     * Busca un nodo en el árbol con la clave especificada y devuelve su valor asociado.
+     * 
+     * @param key la clave del nodo a buscar.
+     * @return el valor asociado al nodo encontrado, o null si no se encuentra el nodo.
+     */
+    public T find(T key) {
         TreeNode<T> current = root;
         while (current != null) {
-            if (data.compareTo(current.getData()) == 0) {
+            if (key.compareTo(current.getData()) == 0) {
                 return current.getAsociacion().getValue();
-            } else if (data.compareTo(current.getData()) < 0) {
-                current = current.left;
+            } else if (key.compareTo(current.getData()) > 0) {
+                current = current.getRight();
             } else {
-                current = current.right;
+                current = current.getLeft();
             }
         }
         return null;
     }
 
-    public ArrayList<Association<T, T>> Ordenarlo( TreeNode<T> root, ArrayList<Association<T, T>> list) {
-        if (root != null) {
-            Ordenarlo(root.left, list);
-            list.add(root.getAsociacion());
-            Ordenarlo(root.right, list);
+    /**
+     * Realiza un recorrido in-order en el árbol y devuelve una lista de las asociaciones de los nodos.
+     * 
+     * @param treeNode el nodo a partir del cual se realizará el recorrido.
+     * @param list la lista donde se almacenarán las asociaciones de los nodos.
+     * @return la lista de las asociaciones de los nodos en orden.
+     */
+    public ArrayList<Asociacion<T,T>> inOrder(TreeNode<T> treeNode, ArrayList<Asociacion<T,T>> list) {
+        if (treeNode != null) {
+            inOrder(treeNode.getLeft(), list);
+            list.add(treeNode.getAsociacion());
+            inOrder(treeNode.getRight(), list);
         }
-        
         return list;
     }
-
-    public boolean contains(T data) {
-        return find(data) != null;
-    }
-
 }
